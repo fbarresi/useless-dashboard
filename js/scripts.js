@@ -78,3 +78,23 @@ function fadeIn(el, display) {
         }
     })();
 };
+
+$(document).ready(function() {
+  loadFact()
+});
+
+setInterval(loadFact, 60000);
+
+function loadFact( )
+{
+  $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "https://uselessfacts.jsph.pl/api/v2/facts/random?language=de",
+      success: function(data) {
+        $("#fact").text(data.text);
+        $("#subtitle").text("Quelle: "+data.source);
+        console.log(data)
+      }
+    });
+}
